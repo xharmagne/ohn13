@@ -1,10 +1,14 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>OHN13 Registration</title>
+    <title>OzHadou Nationals 13 (OHN13) - Australia's longest running major fighting games tournament</title>
     <base href="http://dev.ozhadou.net/" />
 
+    <link rel="stylesheet" href="css/foundation.min.css" />
+    <link rel="stylesheet" href="css/ohn13.css" />
     <link rel="stylesheet" href="css/rego.css" />
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,700|Cabin' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" href="css/jquery-ui.min.css" />
     <link rel="stylesheet" href="css/animate.min.css" />
 
@@ -21,8 +25,6 @@
 
     <link rel="stylesheet" href="css/angular-spinkit.min.css">
     <script type="text/javascript" src="js/angular-spinkit.min.js" ></script>
-
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
@@ -31,8 +33,9 @@
         <!-- TITLE -->
         <div class="title-row full-width">
             <div class="row content-width">
-                <div class="small-12 columns">
-                    <img class="logo" src="img/ohn-logo.png" />
+                <div id="site-title" class="small-12 small-centered columns">
+                    <a name="home"></a>
+                    <h1><a href="#home"><img src="img/logo_ohn.gif" alt="OHN13" /></a></h1>
                 </div>
             </div>
         </div>
@@ -40,8 +43,13 @@
         <!-- HEADER -->
         <div id="top" class="header-row full-width">
             <div class="row content-width">
-                <div class="small-12 columns">
-                    <h2>Registration {{ registrants[0].gamertag }}</h2>
+                <div class="small-12 small-centered columns">
+                    <ul id="menu" class="button-group">
+                        <li><a href="index.html" class="button">Back to the main page</a></li>
+                    </ul>
+                </div>
+                <div class="small-12 small-centered text-center columns">
+                    <h3>Registration</h3>
                 </div>
             </div>
         </div>
@@ -50,7 +58,7 @@
         <div class="form-section full-width" ng-show="isPaymentSuccessful">
             <div class="row form-section-header content-width">
                 <div class="small-12 medium-4 columns">
-                    <h3>Registration confirmed</h3>
+                    <h4 class="subheader">Registration confirmed</h4>
                 </div>
             </div>
             <div class="row content-width">
@@ -63,12 +71,12 @@
         <div class="form-section full-width" ng-show="isPaymentFailed">
             <div class="row form-section-header content-width">
                 <div class="small-12 columns">
-                    <h3>Registration failed</h3>
+                    <h4 class="subheader">Registration failed</h4>
                 </div>
             </div>
             <div class="row content-width">
                 <div class="small-12 columns">
-                    Unable to process Paypal payment. Please contact the Ozhadou team at ????
+                    Unable to process Paypal payment. Please refresh this page or contact the Ozhadou team at <a href="mailto:contact@ozhadou.net">contact@ozhadou.net</a>
                 </div>
             </div>
         </div>
