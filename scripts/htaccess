@@ -1,0 +1,11 @@
+AddHandler php5-script .php
+
+# Disable directory browsing
+Options All -Indexes
+
+<Files rconfig.php>
+order allow,deny
+deny from all
+</Files>
+
+

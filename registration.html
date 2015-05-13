@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>OHN13 Registration</title>
+    <link rel="stylesheet" href="css/rego.css" />
+    <link rel="stylesheet" href="css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="css/animate.min.css" />
+
+    <script type="text/javascript" src="js/vendor/jquery.js"></script>
+    <script type="text/javascript" src="js/vendor/modernizr.js"></script>
+    <script type="text/javascript" src="js/vendor/placeholder.js"></script>
+    <script type="text/javascript" src="js/vendor/fastclick.js"></script>
+    <script type="text/javascript" src="js/foundation.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-animate.min.js"></script>
+
+    <style type="text/css">
+        /* Fastclick fix for elements within labels */
+        label > span {
+            pointer-events: none;
+        }
+    </style>
+
+    <script type="text/javascript" src="js/rego.js"></script>
+
+    <link rel="stylesheet" href="css/angular-spinkit.min.css">
+    <script src="js/angular-spinkit.min.js"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+    <div class="app" ng-class="isBusy ? 'noscroll' : ''" ng-app="registrationApp" ng-controller="RegoController">
+
+        <!-- TITLE -->
+        <div class="title-row full-width">
+            <div class="row content-width">
+                <div class="small-12 columns">
+                    <img class="logo" src="img/ohn-logo.png" />
+                </div>
+            </div>
+        </div>
+
+        <!-- HEADER -->
+        <div id="top" class="header-row full-width">
+            <div class="row content-width">
+                <div class="small-12 columns">
+                    <h2>Registration</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <form name="form" class="ohn-form" novalidate>
+
+            <div class="slide-from-left slide" ng-show="state == 'Editing'">
+
+
+                <!-- ERROR -->
+                <div class="error-section form-section full-width" ng-show="validationFailed">
+                    <div>
+                        <span class="error">Please correct the errors below and try again</span>
+                    </div>
+                </div>
+
+                <!-- REGISTRANT DETAILS FORM-->
+                <div class="animate-repeat" ng-repeat="registrant in registrants track by $index" ng-form="registrantForm">
+
+                    <div class="name-section form-section full-width" ng-show="registrants.length > 1">
+                        <div class="row form-section-header content-width">
+                            <div class="small-12 medium-12 columns">
+                                <div ng-class="registrant.isCollapsed ? 'expand' : 'collapse'" class="icon"
+                                     style="margin-top: 0.4rem; margin-right: 0.5rem;"
+                                     ng-click="toggleRegistrant(registrant)">
+                                </div>
+                                <h3 ng-show="registrant.gamertag != ''" ng-click="toggleRegistrant(registrant)">{{registrant.gamertag}}</h3>
+                                <h3 ng-show="registrant.gamertag == ''" ng-click="toggleRegistrant(registrant)">(new)</h3>
+                                <div class="delete icon"
+                                     style="margin-top: 0.4rem; margin-right: 0.5rem;"
+                                     ng-click="removeRegistrant(registrant)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slide-from-top" ng-hide="registrant.isCollapsed">
+
+                        <div class="type-section form-section full-width">
+                            <div class="row content-width">
+                                <div class="small-12 medium-10 columns end">
+                                    <label></label>
+                                    <div class="small-text-center medium-text-left">
+
+                                        <label ng-class="registrant.type == 'Competitor' ? 'active' : ''" class="button type-button">
+                                            <input required="" type="radio" name="optRegistrantType" ng-model="registrant.type" value="Competitor" class="ui-helper-hidden-accessible">
+                                            <span class="button-text title">Fight!</span>
+                                            <span class="button-text subtitle">Competitor pass</span>
+                                            <span class="button-text price">$35</span>
+                                        </label>
+
+                                        <label ng-class="registrant.type == 'Spectator' ? 'active' : ''" class="button type-button">
+                                            <input type="radio" name="optRegistrantType" ng-model="registrant.type" value="Spectator" class="ui-helper-hidden-accessible">
+                                            <span class="button-text title">Watch</span>
+                                            <span class="button-text subtitle">Spectator pass</span>
+                                            <span class="button-text price">$2000</span>
+                                        </label>
+
+                                        <label ng-class="registrant.type == 'AddGames' ? 'active' : ''" class="button type-button">
+                                            <input required="" type="radio" name="optRegistrantType" ng-model="registrant.type" value="AddGames" class="ui-helper-hidden-accessible">
+                                            <span class="button-text title">Add games</span>
+                                            <span class="button-text subtitle">to existing pass</span>
+                                            <span class="button-text price">n/a</span>
+                                        </label>
+
+                                    </div>
+                                </div>
+                                <div class="small-text-center medium-text-left small-12 medium-10 columns end">
+                                    <div ng-show="validationFailed">
+                                        <span class="error" ng-show="registrantForm.optRegistrantType.$error.required">Please select a pass type</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slide-from-top player-section form-section full-width" ng-hide="registrant.type == ''">
+                            <div class="row form-section-header content-width">
+                                <div class="small-12 medium-4 columns">
+                                    <h3>Player</h3>
+                                </div>
+                            </div>
+
+                            <div class="row content-width">
+                                <div class="form-field small-12 medium-3 columns">
+                                    <label>
+                                        Gamertag
+                                        <input name="gamertag" type="text" ng-model="registrant.gamertag" required="" maxlength="25"
+                                               ohn-existing-competitor="registrant.type == 'AddGames'" />
+                                    </label>
+                                    <div ng-show="validationFailed || registrantForm.gamertag.$touched">
+                                        <span class="error" ng-show="registrantForm.gamertag.$error.required">Please enter your gamertag</span>
+                                        <span class="error" ng-show="registrantForm.gamertag.$error.existing">This gamertag is not registered as a competitor</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slide-from-top" ng-show="registrant.type == 'Competitor' || registrant.type == 'Spectator'">
+                                <div class="row content-width">
+                                    <div class="form-field small-12 medium-3 columns">
+                                        <label>
+                                            First name
+                                            <input name="firstName" type="text" ng-model="registrant.firstName" maxlength="25" />
+                                        </label>
+                                    </div>
+                                    <div class="form-field small-12 medium-3 columns end">
+                                        <label>
+                                            Last name
+                                            <input name="lastName" type="text" ng-model="registrant.lastName" maxlength="25" />
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row content-width">
+                                    <div class="form-field small-12 medium-3 columns">
+                                        <label>
+                                            Email
+                                            <input name="email" type="email" ng-model="registrant.email" ng-required="registrant.type == 'Competitor' || registrant.type == 'Spectator'" maxlength="100" />
+                                        </label>
+                                        <div ng-show="validationFailed || registrantForm.email.$touched">
+                                            <span class="error" ng-show="registrantForm.email.$error.required">Please enter your email address</span>
+                                            <span class="error" ng-show="!registrantForm.email.$error.required && registrantForm.email.$error.email">This is not a valid email address</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row content-width">
+                                    <div class="form-field small-12 medium-2 columns">
+                                        <label>
+                                            State
+                                            <select name="state" ng-model="registrant.state">
+                                                <option value=""></option>
+                                                <option value="NSW">NSW</option>
+                                                <option value="ACT">ACT</option>
+                                                <option value="QLD">QLD</option>
+                                                <option value="VIC">VIC</option>
+                                                <option value="WA">WA</option>
+                                                <option value="SA">SA</option>
+                                                <option value="NT">NT</option>
+                                                <option value="TAS">TAS</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div class="form-field small-12 medium-3 columns end">
+                                        <label>
+                                            &nbsp;
+                                            <input type="text" placeholder="Other location" ng-show="registrant.state == 'Other'" ng-model="registrant.otherLocation" maxlength="100" />
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="slide-from-top games-section form-section full-width" ng-show="registrant.type == 'Competitor' || registrant.type == 'AddGames'">
+                            <div class="row form-section-header content-width">
+                                <div class="small-12 medium-4 columns">
+                                    <h3>Games</h3>
+                                </div>
+                            </div>
+
+                            <div class="row content-width">
+                                <div class="small-12 small-centered medium-uncentered medium-8 columns end">
+                                    <ul class="game-select-grid small-block-grid-2 medium-block-grid-3 large-block-grid-3">
+                                        <li>
+                                            <div>
+                                                <input type="checkbox" ng-model="registrant.usf4" id="chkUSF4-{{ registrant.index }}" class="ui-helper-hidden-accessible">
+                                                <label for="chkUSF4-{{ registrant.index }}" ng-class="registrant.usf4 == true ? 'active' : ''" class="game-button button">
+                                                    <img src="img/gamelogo-usf4-white.png" />
+                                                    <span class="button-text price">$10</span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div>
+                                                <input type="checkbox" ng-model="registrant.ttt2" id="chkTTT2-{{ registrant.index }}" class="ui-helper-hidden-accessible">
+                                                <label for="chkTTT2-{{ registrant.index }}" ng-class="registrant.ttt2 == true ? 'active' : ''" class="game-button button">
+                                                    <img src="img/gamelogo-ttt2-white.png" />
+                                                    <span class="button-text price">$10</span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div>
+                                                <input type="checkbox" ng-model="registrant.mkx" id="chkMKX-{{ registrant.index }}" class="ui-helper-hidden-accessible">
+                                                <label for="chkMKX-{{ registrant.index }}" ng-class="registrant.mkx == true ? 'active' : ''" class="game-button button">
+                                                    <img src="img/gamelogo-mkx-white.png" />
+                                                    <span class="button-text price">$10</span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div>
+                                                <input type="checkbox" ng-model="registrant.kof" id="chkKOF-{{ registrant.index }}" class="ui-helper-hidden-accessible">
+                                                <label for="chkKOF-{{ registrant.index }}" ng-class="registrant.kof == true ? 'active' : ''" class="game-button button">
+                                                    <img src="img/gamelogo-kof-white.png" />
+                                                    <span class="button-text price">$10</span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div>
+                                                <input type="checkbox" ng-model="registrant.mvc" id="chkMVC-{{ registrant.index }}" class="ui-helper-hidden-accessible">
+                                                <label for="chkMVC-{{ registrant.index }}" ng-class="registrant.mvc == true ? 'active' : ''" class="game-button button">
+                                                    <img src="img/gamelogo-mvc-white.png" />
+                                                    <span class="button-text price">$10</span>
+                                                </label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ACTIONS -->
+                <div class="buttons-section form-section full-width">
+                    <div class="row content-width">
+                        <div class="small-12 small-centered medium-text-left columns">
+                            <button class="button secondary" ng-click="addRegistrant()">Add a person</button>
+                            <button class="button" ng-click="reviewRegistration()">Review registration</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="slide-from-right slide" ng-show="state == 'Reviewing'">
+
+                <div class="review-section form-section full-width">
+
+                    <div class="row form-section-header content-width">
+                        <div class="small-12 medium-4 columns">
+                            <h3>Review</h3>
+                        </div>
+                    </div>
+
+
+                    <!-- REGISTRANT DETAILS -->
+                    <div class="row content-width">
+                        <div class="small-12 columns">
+                            <table>
+                                <tbody>
+                                    <tr class="registrant-name" ng-repeat-start="registrant in registrants track by $index">
+                                        <td>
+                                            <div class="edit icon"
+                                                 ng-click="editRegistration(registrant)">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="gamertag">{{ registrant.gamertag }}</div>
+                                            <div class="email">{{ registrant.email }}</div>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr ng-repeat="item in registrant.items">
+                                        <td></td>
+                                        <td>{{ item.name }}</td>
+                                        <td class="numeric">{{ item.price | currency:"$":0 }}</td>
+                                    </tr>
+                                    <tr ng-repeat-end class="totals sub-total">
+                                        <td colspan="2">
+                                            {{ registrant.gamertag }} Total
+                                        </td>
+                                        <td class="numeric">
+                                            {{ registrant.total | currency:"$":0 }}
+                                        </td>
+
+                                    </tr>
+                                    <tr class="totals grand-total">
+                                        <td colspan="2">
+                                            Total
+                                        </td>
+                                        <td class="numeric">
+                                            {{ total | currency:"$":0 }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- TOTAL -->
+                <div class="totals-section form-section full-width">
+                    <div class="row content-width">
+                        <div class="small-12 small-text-center medium-text-left columns">
+                            <span class="total-label">Total</span> <span class="total-price">{{ total | currency:"$":0  }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ACTIONS -->
+                <div class="buttons-section form-section full-width">
+                    <div class="row content-width">
+                        <div class="small-12 small-centered small-text-center medium-text-left columns">
+                            <button class="button secondary" ng-click="editRegistration()">Edit registration</button>
+                            <a href="#" data-paypal-button="true" ng-click="pay()">
+                                <img src="https://www.paypal.com/en_AU/AU/i/btn/btn_xpressCheckout.gif" style="margin-right:7px;">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+
+        <!-- LOADING -->
+        <div class="loading" ng-show="isBusy">
+            <circle-spinner></circle-spinner>
+        </div>
+
+
+    </div>
+
+
+</body>
+</html>
