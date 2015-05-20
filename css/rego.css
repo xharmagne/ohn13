@@ -493,7 +493,7 @@ html, body {
 /* line 73, ../scss/rego.scss */
 .row.content-width,
 .content-width {
-  max-width: 65rem;
+  max-width: 55rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -886,17 +886,19 @@ table tr.grand-total td {
 
 /* line 425, ../scss/rego.scss */
 .slide-from-top.ng-hide-remove {
+  animation: fadeInDown 0.5s;
   -webkit-animation: fadeInDown 0.5s;
-  animation: fadeInDownBig 0.5s;
+  -moz-animation: fadeInDown 0.5s;
 }
 
-/* line 430, ../scss/rego.scss */
+/* line 432, ../scss/rego.scss */
 .slide-from-top.ng-hide-add {
+  animation: fadeOutUp 0.5s;
   -webkit-animation: fadeOutUp 0.5s;
-  animation: fadeOutUpBig 0.5s;
+  -moz-animation: fadeOutUp 0.5s;
 }
 
-/* line 435, ../scss/rego.scss */
+/* line 438, ../scss/rego.scss */
 .animate-repeat.ng-move,
 .animate-repeat.ng-enter,
 .animate-repeat.ng-leave {
@@ -906,7 +908,7 @@ table tr.grand-total td {
   transition-delay: 0.65s;
 }
 
-/* line 444, ../scss/rego.scss */
+/* line 447, ../scss/rego.scss */
 .animate-repeat.ng-leave.ng-leave-active,
 .animate-repeat.ng-move,
 .animate-repeat.ng-enter {
@@ -914,7 +916,7 @@ table tr.grand-total td {
   max-height: 0;
 }
 
-/* line 451, ../scss/rego.scss */
+/* line 454, ../scss/rego.scss */
 .animate-repeat.ng-leave,
 .animate-repeat.ng-move.ng-move-active,
 .animate-repeat.ng-enter.ng-enter-active {
@@ -922,7 +924,7 @@ table tr.grand-total td {
   max-height: 1048px;
 }
 
-/* line 460, ../scss/rego.scss */
+/* line 463, ../scss/rego.scss */
 .loading {
   z-index: 9999;
   width: 100%;
@@ -931,19 +933,19 @@ table tr.grand-total td {
   position: absolute;
   top: 0;
 }
-/* line 468, ../scss/rego.scss */
+/* line 471, ../scss/rego.scss */
 .loading .spinning-dots-spinner {
   width: 40px;
   height: 40px;
   margin: 12.5rem auto 0 auto;
 }
-/* line 474, ../scss/rego.scss */
+/* line 477, ../scss/rego.scss */
 .loading .container1 > div, .loading .container2 > div, .loading .container3 > div {
   width: 12px;
   height: 12px;
   background-color: #1c94c4;
 }
-/* line 480, ../scss/rego.scss */
+/* line 483, ../scss/rego.scss */
 .loading .loading-text {
   color: #1c94c4;
   margin-left: auto;

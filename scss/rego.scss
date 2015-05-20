@@ -48,7 +48,7 @@ $medium-up: "#{$screen} and (min-width:#{lower-bound($medium-range)})";
 
 
 //// General ///////////////////////////////////////
-$content-max-width: 1200px;
+$content-max-width: 55rem;
 
 html, body {
     width: 100%;
@@ -72,7 +72,7 @@ html, body {
 
 .row.content-width,
 .content-width {
-    max-width: 65rem;
+    max-width: $content-max-width;
     margin-left: auto;
     margin-right: auto;
 }
@@ -423,13 +423,16 @@ table tr.grand-total td {
 }
 
 .slide-from-top.ng-hide-remove {
+    animation: fadeInDown 0.5s;
     -webkit-animation: fadeInDown 0.5s;
-    animation: fadeInDownBig 0.5s;
+    -moz-animation: fadeInDown 0.5s;
+
 }
  
 .slide-from-top.ng-hide-add {
+    animation: fadeOutUp 0.5s;
     -webkit-animation: fadeOutUp 0.5s;
-    animation: fadeOutUpBig 0.5s;
+    -moz-animation: fadeOutUp 0.5s;
 }
 
 .animate-repeat.ng-move,
