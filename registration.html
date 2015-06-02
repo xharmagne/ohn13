@@ -184,6 +184,12 @@
                                             <span class="error" ng-show="!registrantForm.email.$error.required && registrantForm.email.$error.email">This is not a valid email address</span>
                                         </div>
                                     </div>
+                                    <div class="form-field small-12 medium-3 columns end">
+                                        <label>
+                                            Contact number
+                                            <input name="contactNumber" type="text" ng-model="registrant.contactNumber" maxlength="25" />
+                                        </label>
+                                    </div>
                                 </div>
 
                                 <div class="row content-width">

@@ -18,7 +18,7 @@ function RegoController($scope, $http, $anchorScroll, $window) {
                   { code: "KOF", description: "King of Fighters XIII tournament entry", price: 10 },
                   { code: "UMVC3", description: "Ultimate Marvel vs Capcom 3 tournament entry", price: 10 }];
 
-    that.init = function() {
+    that.init = function () {
         that.scope.safeApply(function () {
             that.scope.isBusy = false;
             that.scope.state = "Editing";
@@ -28,7 +28,7 @@ function RegoController($scope, $http, $anchorScroll, $window) {
             that.scope.registrants = [];
             that.scope.registrants.push(that.scope.createRegistrant(0));
         });
-       
+
     };
 
     that.scope.summarizeItems = function () {
@@ -119,6 +119,7 @@ function RegoController($scope, $http, $anchorScroll, $window) {
         registrant.firstName = "";
         registrant.lastName = "";
         registrant.email = "";
+        registrant.contactNumber = "";
         registrant.state = "";
         registrant.otherLocation = "";
         registrant.usf4 = false;
@@ -127,7 +128,7 @@ function RegoController($scope, $http, $anchorScroll, $window) {
         registrant.kof = false;
         registrant.mvc = false;
         registrant.isCollapsed = false;
-        
+
         registrant.items = [];
         registrant.total = 0;
 
@@ -330,7 +331,7 @@ regoapp.directive('ohnExistingCompetitor', ['$http', function ($http) {
             elem.on('blur', function (evt) {
                 scope.$apply(checkCompetitorExists);
             });
-            scope.$watch(attrs.ohnExistingCompetitor, function(newValue, oldValue) {
+            scope.$watch(attrs.ohnExistingCompetitor, function (newValue, oldValue) {
                 if (newValue != oldValue) {
                     checkCompetitorExists();
                 }

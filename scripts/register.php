@@ -14,7 +14,7 @@ $count = count($registrants);
 
 $insertcount = 0;
 $insertquery = 
-  "insert into `ohn13_registrants` (`Gamertag`, `Pass_type`, `First_name`, `Last_name`, `Email`, `State`, 
+  "insert into `ohn13_registrants` (`Gamertag`, `Pass_type`, `First_name`, `Last_name`, `Email`, `Contact_number`, `State`, 
                                     `USF4`, `TTT2`, `MKX`, `KOF`, `MARVEL`,
                                     `Payment_ID`, `Payment_status`) values ";
 
@@ -28,6 +28,7 @@ for ($i=0; $i < $count; $i++) {
   $firstname = $mysqli->real_escape_string($registrants[$i]->firstName);
   $lastname = $mysqli->real_escape_string($registrants[$i]->lastName);
   $email = $mysqli->real_escape_string($registrants[$i]->email);
+  $contactnumber = $mysqli->real_escape_string($registrants[$i]->contactNumber);
   $state = $mysqli->real_escape_string($registrants[$i]->state);
   if (trim($state) == 'Other') {
     $state = $mysqli->real_escape_string($registrants[$i]->otherLocation);
@@ -41,7 +42,7 @@ for ($i=0; $i < $count; $i++) {
   
   if ($passtype != "AddGames") {
 
-    $insertquery .= "('$gamertag', '$passtype', '$firstname', '$lastname', '$email', '$state', 
+    $insertquery .= "('$gamertag', '$passtype', '$firstname', '$lastname', '$email', '$contactnumber', '$state', 
                       $usf4, $ttt2, $mkx, $kof, $mvc,
                       '$paymentId', 'Pending'), ";
     
