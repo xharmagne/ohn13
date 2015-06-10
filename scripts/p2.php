@@ -1,29 +1,63 @@
 ﻿<?php session_start();
+require_once('./rconfig.php');
 
-$data = json_decode(file_get_contents("php://input"));
-$payerData = json_encode($data);
 $result = "";
 
-$url = "https://api.sandbox.paypal.com/v1/payments/payment/".$_SESSION["payment_id"]."/execute";
+$postData[] = "USER=".PP_USERNAME;
+$postData[] = "PWD=".PP_PASSWORD;            
+$postData[] = "SIGNATURE=".PP_SIGNATURE;
+$postData[] = "METHOD=GetExpressCheckoutDetails";
+$postData[] = "VERSION=123";
+$postData[] = "TOKEN=".$_SESSION["access_token"];
+           
+$postData_str = implode('&',$postData);
+error_log("GetExpressCheckoutDetails:".$postData_str);
+
+$url = PP_ENDPOINT;
 $ch = curl_init($url);                                                                      
 curl_setopt($ch, CURLOPT_POST, true);      
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $payerData); 
-curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                    "Content-Type: application/json",
-                    "Authorization: Bearer " . $_SESSION["access_token"], 
-                    "Content-length: " . strlen($payerData))
-                    );
-                    
-$execResult = curl_exec($ch);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $postData_str); 
 
-if (curl_errno($ch) || empty($execResult)) {
+$getResult = curl_exec($ch);
+
+if (curl_errno($ch) || empty($getResult)) {
   header('HTTP/1.1 500 Internal Server Error');
   exit();
 }
 else {
-  $result = "ok";            
+
+  error_log("GetExpressCheckoutDetails:".$getResult);
+  parse_str($getResult, $result_array);
+  $payer_id = $result_array['PAYERID'];
+  error_log("GetExpressCheckoutDetails:".$payer_id);
+  
+  $execPostData[] = "USER=".PP_USERNAME;
+  $execPostData[] = "PWD=".PP_PASSWORD;            
+  $execPostData[] = "SIGNATURE=".PP_SIGNATURE;
+  $execPostData[] = "METHOD=DoExpressCheckoutPayment";
+  $execPostData[] = "VERSION=123";
+  $execPostData[] = "PAYERID=".$payer_id;
+  $execPostData[] = "TOKEN=".$_SESSION["access_token"];
+           
+  $execPostData_str = implode('&',$execPostData);
+  error_log("DoExpressCheckoutPayment:".$execPostData_str);
+
+  curl_setopt($ch, CURLOPT_URL, PP_ENDPOINT);
+  curl_setopt($ch, CURLOPT_POST, true); 
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $execPostData_str); 
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                  
+  $execResult = curl_exec($ch);
+             
+  if (curl_errno($ch) || empty($execResult)) {
+    header('HTTP/1.1 500 Internal Server Error');
+    exit();
+  }
+  else {
+    $result = "ok";
+  }
 }
 
 curl_close($ch);

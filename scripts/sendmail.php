@@ -32,18 +32,18 @@ function send_mail($toName, $toAddress, $subject, $body, $plainBody) {
   $mail->Password = SMTP_PASSWORD;
 
   //Set who the message is to be sent from
-  $mail->setFrom('ohn13@ozhadou.net', 'OHN 13 Registration');
-
-  //Set an alternative reply-to address
-  $mail->addReplyTo('contact@ozhadou.net', 'Ozhadou');
+  $mail->setFrom('ohn@ozhadou.net', 'OHN 13 Registration');
 
   //Set who the message is to be sent to
   $mail->addAddress($toAddress, $toName);
 
+  //Send copy to Ozhadou
+  $mail->addBCC('ohn@ozhadou.net', 'Ozhadou team');
+
   $mail->isHTML(true); 
 
   //Mail content
-  $mail->Subject = $subject;
+  $mail->Subject = $subject." [TEST]";
   $mail->Body = $body;
   $mail->AltBody = $plainBody;
 

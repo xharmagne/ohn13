@@ -229,11 +229,7 @@ function RegoController($scope, $http, $anchorScroll, $window) {
                   },
                   "soft_descriptor": "OHN13 Registration"
               }
-            ],
-            "redirect_urls": {
-                "return_url": "http://dev.ozhadou.net/confirmed.html",
-                "cancel_url": "http://dev.ozhadou.net/cancelled.html"
-            }
+            ]
         };
 
 
@@ -255,22 +251,17 @@ function RegoController($scope, $http, $anchorScroll, $window) {
                 return;
             }
 
-            var paymentId = response.id;
+            var paymentId = response;
 
             // Store registrants data in database
             that.scope.register(paymentId, function () {
 
-                // Get approval URL
-                var approvalUrlMatches = $.grep(response.links, function (l) {
-                    return l.rel == "approval_url";
-                });
-
-                var approvalUrlMatch = approvalUrlMatches[0];
+                var redirectUrl = "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=" + paymentId;
 
                 // Redirect to approval URL
                 // After user approves payment on Paypal, Paypal will redirect to redirect URL 
-                // specified in redirect_urls above
-                $window.location.href = approvalUrlMatch.href;
+                // specified in initial call to create payment
+                $window.location.href = redirectUrl;
             });
 
         }).error(function () {

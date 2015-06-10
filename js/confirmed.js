@@ -19,7 +19,7 @@ function ConfirmedController($scope, $http, $window, $location) {
         
         var qParams = that.location.search();
         var payerId = qParams.PayerID;
-        var paymentId = qParams.paymentId;
+        var paymentId = qParams.token;
 
         if (!payerId) {
             that.scope.isBusy = false;
