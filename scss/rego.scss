@@ -10,7 +10,7 @@ $button-border-width: 2px;
  $ghost       : #FAFAFA;
  $snow        : #F9F9F9;
 
-$ozhadou-blue: #1B75BB;
+$ozhadou-blue: #1B75BA;
 $ozhadou-teal: #38ADCE;
 $ozhadou-dark-teal: #1c94c4;
 $ozhadou-light-grey: #a6a8ab;
@@ -63,6 +63,10 @@ html, body {
     }
 }
 
+h3, .subheader {
+    padding-top: 0;
+}
+
 .row.full-width,
 .full-width {
     max-width: 100%;
@@ -82,7 +86,7 @@ html, body {
 }
 
 .form-section {
-    padding: 1rem 0 1rem 0;
+    padding: 1.3rem 0 1rem 0;
 }
 
 
@@ -146,20 +150,19 @@ html, body {
 
 .type-section {
     padding: 1.75rem 0 1rem 0;
-    background-color: $ozhadou-dark-teal;
+    background-color: $white;
+    border-bottom: solid 1px #ccc;
 }
 
 .player-section {
     background-color: $white;
+    border-bottom: solid 1px #ccc;
 }
 
 .games-section {
-    background-color: scale-color($ozhadou-light-grey, $lightness:20%);
+    background-color: $white;
     margin-bottom: 0.5rem;
-
-    h4 {
-        color: #444;
-    }
+    border-bottom: solid 1px #ccc;
 }
 
 .buttons-section {
@@ -178,6 +181,14 @@ html, body {
     .total-price {
         font-size: 2rem;
     }
+}
+
+span.step-number {
+    font-size: 2rem;
+    position:relative;
+    top: 0.1rem;
+    margin-right: 0.3rem;
+    color: #cdcdcd;
 }
 
 @media #{$medium-up} {
@@ -200,7 +211,7 @@ form {
 }
 
 .ohn-form {
-    input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea {
+    input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea, select {
         margin-bottom: 0;
     }
 
@@ -246,6 +257,9 @@ input[type="checkbox"]:active + label.button {
     left: 2px;
 }
 
+.game-button-container {
+    text-align: center;
+}
 
 .game-button {
     @include button-style($bg: #f6f6f6, $radius:false, $disabled:false, $bg-hover:$ozhadou-blue, $border-color: scale-color($ozhadou-light-grey,$lightness:50%));
@@ -269,12 +283,15 @@ input[type="checkbox"]:active + label.button {
 }
 
 .type-button {
-    @include button-style($bg: #f6f6f6, $radius:false, $disabled:false, $bg-hover:$ozhadou-blue, $border-color:$ozhadou-light-grey);
-    padding: 0.4rem 0 0.4rem 0;
-    color: $ozhadou-dark-teal;
+    @include button-style($bg: $ozhadou-blue, $radius:false, $disabled:false, $bg-hover:scale-color($ozhadou-teal,$lightness:-10%), $border-color:$ozhadou-teal);
+    padding: 1rem 0;
+    color: $white;
+    margin: 0.5rem 1.45% 1rem 1.45%;
+    width: 30%;
+    min-width: 12rem;
 
     &.active {
-        @include button-style($bg: $ozhadou-blue, $radius:false, $disabled:false, $bg-hover:null, $border-color: scale-color($ozhadou-teal, $lightness:+40%));
+        @include button-style($bg: $ozhadou-teal, $radius:false, $disabled:false, $bg-hover:null, $border-color: $ozhadou-teal);
     }
 
     &:active {
@@ -284,21 +301,21 @@ input[type="checkbox"]:active + label.button {
     }
 }
 
-label.type-button {
-    width: 10rem;
-    margin: 0 1rem 0.5rem 0.5rem;
-
-}
 
 input[type="radio"] + label.game-button,
 input[type="checkbox"] + label.game-button {
     width: 100%;
-    margin: 0 1rem 1rem 0;
+    margin: 0.5rem 1rem 0rem 0;
     
     img {
         opacity: 0.9;
         margin-bottom: 0.5rem;
     }
+}
+
+input[disabled] + label.game-button {
+    opacity: 0.5;
+    @include button-style($bg: #f6f6f6, $radius:false, $disabled:false, $bg-hover:#f6f6f6, $border-color: scale-color($ozhadou-light-grey,$lightness:50%));
 }
 
 
@@ -307,7 +324,7 @@ input[type="checkbox"] + label.game-button {
     display: block;
 
     &.title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-weight: bold;
         margin-bottom: 0.5rem;
     }
@@ -319,7 +336,7 @@ input[type="checkbox"] + label.game-button {
     }
 
     &.price {
-        font-size: 1.2rem;
+        font-size: 1rem;
         font-weight: normal;
     }
 }

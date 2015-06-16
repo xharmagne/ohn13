@@ -48,10 +48,59 @@ a:hover {
     color: #1B75BA;
     text-transform: uppercase;
     font-family: 'Cabin', sans-serif;
-    padding: 1.25rem 2.5rem;
+    padding: 1.25rem 2rem;
 }
 
 #menu a.button:hover {
     color: #38ADCE;
-    
 }
+
+/*.type-section {
+    background-color: #fff !important;  
+    padding: 1.75rem 0 0 !important;
+}*/
+
+/*label.type-button {
+    background-color: #1B75BA !important;
+    border-color: #fff !important;
+    color: #fff !important;
+    margin: 1rem 1.45% !important;
+    width: 30% !important;
+}*/
+
+/*.button-text.title {
+    font-size: 1.25rem !important;   
+}
+
+.button-text.price {
+    font-size: 1rem !important;   
+}
+
+.type-button {
+    padding: 1rem 0 !important;   
+}*/
+
+/*.type-button:hover, .type-button:focus {
+  background: #38ADCE !important;
+}*/
+
+.games-section {
+ background-color: #fff !important;   
+}
+
+.content-image {
+    float: right;
+}
+
+@media only screen and (max-width: 40em) {
+    .content-image {
+        float: none;
+        display: block;
+        margin: 20px auto;
+    }
+    
+    #menu a.button {        
+        padding: 1rem;
+    }
+}
+

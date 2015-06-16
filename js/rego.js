@@ -129,6 +129,10 @@ function RegoController($scope, $http, $anchorScroll, $window) {
         registrant.mvc = false;
         registrant.isCollapsed = false;
 
+        registrant.usf4Registered = false;
+        registrant.ttt2Registered = false;
+        registrant.mkxRegistered = false;
+
         registrant.items = [];
         registrant.total = 0;
 
@@ -164,6 +168,55 @@ function RegoController($scope, $http, $anchorScroll, $window) {
 
         if (that.scope.registrants.length == 1) {
             that.scope.registrants[0].isCollapsed = false;
+        }
+    };
+
+    that.scope.resetGamesSelected = function (registrant) {
+        registrant.usf4 = false;
+        registrant.ttt2 = false;
+        registrant.mkx = false;
+        registrant.usf4Registered = false;
+        registrant.ttt2Registered = false;
+        registrant.mkxRegistered = false;
+    };
+
+    that.scope.getExistingRegistrant = function (registrant) {
+
+        that.scope.resetGamesSelected(registrant);
+
+        if (registrant.gamertag && registrant.type == "AddGames") {
+
+            $http({
+                method: 'POST',
+                url: 'scripts/getCompetitor.php',
+                data: {
+                    gamertag: registrant.gamertag
+                }
+            }).success(function (data, status, headers, config) {
+
+                registrant.usf4 = false;
+                registrant.ttt2 = false;
+                registrant.mkx = false;
+
+                if (data) {
+                    registrant.usf4Registered = data.usf4Registered == true;
+                    registrant.ttt2Registered = data.ttt2Registered == true;
+                    registrant.mkxRegistered = data.mkxRegistered == true;
+                }
+                
+            });
+        }
+
+    };
+
+    that.scope.competitorPassSelected = function (registrant) {
+        that.scope.resetGamesSelected(registrant);
+    };
+
+    that.scope.mkxSelectionChanged = function (mkxSelected) {
+
+        if (mkxSelected) {
+            $('#mkxDialog').foundation('reveal', 'open');
         }
     };
 
@@ -297,13 +350,13 @@ regoapp.controller('RegoController', function ($scope, $http, $anchorScroll, $wi
 });
 
 
-// directive
+// directives
 regoapp.directive('ohnExistingCompetitor', ['$http', function ($http) {
     return {
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
             function checkCompetitorExists() {
-                if (scope.$eval(attrs.ohnExistingCompetitor)) {
+                if (elem.val() && scope.$eval(attrs.ohnExistingCompetitor)) {
 
                     $http({
                         method: 'POST',
@@ -323,6 +376,39 @@ regoapp.directive('ohnExistingCompetitor', ['$http', function ($http) {
                 scope.$apply(checkCompetitorExists);
             });
             scope.$watch(attrs.ohnExistingCompetitor, function (newValue, oldValue) {
+                if (newValue != oldValue) {
+                    checkCompetitorExists();
+                }
+            });
+        }
+    }
+}]);
+
+regoapp.directive('ohnUniqueCompetitor', ['$http', function ($http) {
+    return {
+        require: 'ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+            function checkCompetitorExists() {
+                if (elem.val() && scope.$eval(attrs.ohnUniqueCompetitor)) {
+
+                    $http({
+                        method: 'POST',
+                        url: 'scripts/checkCompetitorExists.php',
+                        data: {
+                            gamertag: elem.val()
+                        }
+                    }).success(function (data, status, headers, config) {
+                        var isValid = data == false;
+                        ctrl.$setValidity('unique', isValid);
+                    });
+                } else {
+                    ctrl.$setValidity('unique', true);
+                }
+            }
+            elem.on('blur', function (evt) {
+                scope.$apply(checkCompetitorExists);
+            });
+            scope.$watch(attrs.ohnUniqueCompetitor, function (newValue, oldValue) {
                 if (newValue != oldValue) {
                     checkCompetitorExists();
                 }
