@@ -34,11 +34,19 @@ for ($i=0; $i < $count; $i++) {
     $state = $mysqli->real_escape_string($registrants[$i]->otherLocation);
   }
   
-  $usf4 = ($registrants[$i]->usf4) ? "true" : "false";
-  $ttt2 = ($registrants[$i]->ttt2) ? "true" : "false";
-  $mkx  = ($registrants[$i]->mkx) ? "true" : "false";
-  $kof  = ($registrants[$i]->kof) ? "true" : "false";
-  $mvc  = ($registrants[$i]->mvc) ? "true" : "false";
+  $usf4 = "false";
+  $ttt2 = "false";
+  $mkx  = "false";
+  $kof  = "false";
+  $mvc  = "false";
+  
+  if ($passtype != "Spectator") {
+    $usf4 = ($registrants[$i]->usf4) ? "true" : "false";
+    $ttt2 = ($registrants[$i]->ttt2) ? "true" : "false";
+    $mkx  = ($registrants[$i]->mkx) ? "true" : "false";
+    $kof  = ($registrants[$i]->kof) ? "true" : "false";
+    $mvc  = ($registrants[$i]->mvc) ? "true" : "false";
+  }
   
   if ($passtype != "AddGames") {
 

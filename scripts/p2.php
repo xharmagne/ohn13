@@ -31,6 +31,7 @@ else {
   error_log("GetExpressCheckoutDetails:".$getResult);
   parse_str($getResult, $result_array);
   $payer_id = $result_array['PAYERID'];
+  $amt = $result_array['PAYMENTREQUEST_0_AMT'];
   error_log("GetExpressCheckoutDetails:".$payer_id);
   
   $execPostData[] = "USER=".PP_USERNAME;
@@ -39,6 +40,10 @@ else {
   $execPostData[] = "METHOD=DoExpressCheckoutPayment";
   $execPostData[] = "VERSION=123";
   $execPostData[] = "PAYERID=".$payer_id;
+  $execPostData[] = "PAYMENTREQUEST_0_PAYMENTACTION=SALE";
+  $execPostData[] = "PAYMENTREQUEST_0_AMT=".$amt;
+  $execPostData[] = "PAYMENTREQUEST_0_ITEMAMT=".$amt;
+  $execPostData[] = "PAYMENTREQUEST_0_CURRENCYCODE=AUD";
   $execPostData[] = "TOKEN=".$_SESSION["access_token"];
            
   $execPostData_str = implode('&',$execPostData);
@@ -51,11 +56,21 @@ else {
                   
   $execResult = curl_exec($ch);
              
+  error_log("DoExpressCheckoutPayment:".$execResult);
+             
   if (curl_errno($ch) || empty($execResult)) {
     header('HTTP/1.1 500 Internal Server Error');
     exit();
   }
   else {
+    parse_str($execResult, $exresult_array);
+    $execStatus = $exresult_array['ACK'];
+    
+    if ($execStatus != "Success") {
+      header('HTTP/1.1 500 Internal Server Error');
+      exit();
+    }
+    
     $result = "ok";
   }
 }

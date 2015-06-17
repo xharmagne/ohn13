@@ -262,7 +262,7 @@ input[type="checkbox"]:active + label.button {
 }
 
 .game-button {
-    @include button-style($bg: #f6f6f6, $radius:false, $disabled:false, $bg-hover:$ozhadou-blue, $border-color: scale-color($ozhadou-light-grey,$lightness:50%));
+    @include button-style($bg: #f6f6f6, $radius:false, $disabled:false, $bg-hover:rgba(141,186,220,0.3), $border-color: scale-color($ozhadou-light-grey,$lightness:50%));
     padding: 0;
     padding-bottom: 0.4rem;
     color: $ozhadou-dark-teal;
@@ -275,6 +275,10 @@ input[type="checkbox"]:active + label.button {
         position: relative;
         top: 3px;
         left: 3px;
+    }
+
+    &:hover {
+        color: $ozhadou-dark-teal;
     }
 
     img {

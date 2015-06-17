@@ -7,6 +7,7 @@ function RegoController($scope, $http, $anchorScroll, $window) {
     that.scope = $scope;
     that.http = $http;
     that.anchorScroll = $anchorScroll;
+    that.currentRegistrantForAgeCheck = null;
 
     that.passTypes = [{ type: "Competitor", description: "Competitor pass", price: 35 },
                       { type: "Spectator", description: "Spectator pass", price: 5 },
@@ -213,12 +214,23 @@ function RegoController($scope, $http, $anchorScroll, $window) {
         that.scope.resetGamesSelected(registrant);
     };
 
-    that.scope.mkxSelectionChanged = function (mkxSelected) {
+    that.scope.mkxSelectionChanged = function (registrant) {
 
-        if (mkxSelected) {
+        if (registrant.mkx) {
+            that.currentRegistrantForAgeCheck = registrant;
             $('#mkxDialog').foundation('reveal', 'open');
         }
     };
+
+    that.scope.closeMkxDialog = function (isAgeOk) {
+
+        if (that.currentRegistrantForAgeCheck) {
+            that.currentRegistrantForAgeCheck.mkx = isAgeOk;
+        }
+
+        $('#mkxDialog').foundation('reveal', 'close');
+
+    }
 
     that.scope.register = function (paymentId, onSuccess) {
 

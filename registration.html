@@ -267,7 +267,7 @@
                                         </li>
                                         <li>
                                             <div class="game-button-container">
-                                                <input type="checkbox" ng-model="registrant.mkx" ng-change="mkxSelectionChanged(registrant.mkx)" id="chkMKX-{{ registrant.index }}" class="ui-helper-hidden-accessible"
+                                                <input type="checkbox" ng-model="registrant.mkx" ng-change="mkxSelectionChanged(registrant)" id="chkMKX-{{ registrant.index }}" class="ui-helper-hidden-accessible"
                                                        ng-disabled="registrant.mkxRegistered">
                                                 <label for="chkMKX-{{ registrant.index }}" ng-class="registrant.mkx == true ? 'active' : ''" class="game-button button">
                                                     <img src="img/gamelogo-mkx-white.png" />
@@ -403,10 +403,10 @@
             <circle-spinner></circle-spinner>
         </div>
 
-        <div id="mkxDialog" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <div id="mkxDialog" style="text-align:center" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
             <h2 id="modalTitle">Are you 18 years or older?</h2>
             <p>You must be at least 18 years old to play Mortal Kombat X. We will be checking IDs on entry.</p>
-            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+            <button ng-click="closeMkxDialog(true)">Yes</button> <button class="secondary" ng-click="closeMkxDialog(false)">No</button>
         </div>
 
 

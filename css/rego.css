@@ -692,11 +692,11 @@ input[type="checkbox"]:active + label.button {
 }
 /* line 162, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 .game-button:hover, .game-button:focus {
-  background-color: #1B75BA;
+  background-color: rgba(141, 186, 220, 0.3);
 }
 /* line 168, ../bower_components/foundation/scss/foundation/components/_buttons.scss */
 .game-button:hover, .game-button:focus {
-  color: #FFFFFF;
+  color: #333333;
 }
 /* line 270, ../scss/rego.scss */
 .game-button.active {
@@ -719,11 +719,15 @@ input[type="checkbox"]:active + label.button {
   left: 3px;
 }
 /* line 280, ../scss/rego.scss */
+.game-button:hover {
+  color: #1c94c4;
+}
+/* line 284, ../scss/rego.scss */
 .game-button img {
   pointer-events: none;
 }
 
-/* line 285, ../scss/rego.scss */
+/* line 289, ../scss/rego.scss */
 .type-button {
   background-color: #1B75BA;
   border-color: #38ADCE;
@@ -742,7 +746,7 @@ input[type="checkbox"]:active + label.button {
 .type-button:hover, .type-button:focus {
   color: #FFFFFF;
 }
-/* line 293, ../scss/rego.scss */
+/* line 297, ../scss/rego.scss */
 .type-button.active {
   background-color: #38ADCE;
   border-color: #38ADCE;
@@ -756,27 +760,27 @@ input[type="checkbox"]:active + label.button {
 .type-button.active:hover, .type-button.active:focus {
   color: #FFFFFF;
 }
-/* line 297, ../scss/rego.scss */
+/* line 301, ../scss/rego.scss */
 .type-button:active {
   position: relative;
   top: 3px;
   left: 3px;
 }
 
-/* line 305, ../scss/rego.scss */
+/* line 309, ../scss/rego.scss */
 input[type="radio"] + label.game-button,
 input[type="checkbox"] + label.game-button {
   width: 100%;
   margin: 0.5rem 1rem 0rem 0;
 }
-/* line 310, ../scss/rego.scss */
+/* line 314, ../scss/rego.scss */
 input[type="radio"] + label.game-button img,
 input[type="checkbox"] + label.game-button img {
   opacity: 0.9;
   margin-bottom: 0.5rem;
 }
 
-/* line 316, ../scss/rego.scss */
+/* line 320, ../scss/rego.scss */
 input[disabled] + label.game-button {
   opacity: 0.5;
   background-color: #f6f6f6;
@@ -792,98 +796,98 @@ input[disabled] + label.game-button:hover, input[disabled] + label.game-button:f
   color: #333333;
 }
 
-/* line 322, ../scss/rego.scss */
+/* line 326, ../scss/rego.scss */
 .button-text {
   display: block;
 }
-/* line 326, ../scss/rego.scss */
+/* line 330, ../scss/rego.scss */
 .button-text.title {
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
-/* line 332, ../scss/rego.scss */
+/* line 336, ../scss/rego.scss */
 .button-text.subtitle {
   font-size: 0.8rem;
   font-weight: normal;
   margin-bottom: 0.2rem;
 }
-/* line 338, ../scss/rego.scss */
+/* line 342, ../scss/rego.scss */
 .button-text.price {
   font-size: 1rem;
   font-weight: normal;
 }
 
-/* line 344, ../scss/rego.scss */
+/* line 348, ../scss/rego.scss */
 input[type="checkbox"] + label,
 input[type="radio"] + label {
   vertical-align: top;
 }
 
-/* line 349, ../scss/rego.scss */
+/* line 353, ../scss/rego.scss */
 .icon {
   width: 25px;
   height: 25px;
   float: left;
   cursor: pointer;
 }
-/* line 355, ../scss/rego.scss */
+/* line 359, ../scss/rego.scss */
 .icon.expand {
   background-image: url("../img/arrow-down.png");
 }
-/* line 359, ../scss/rego.scss */
+/* line 363, ../scss/rego.scss */
 .icon.collapse {
   background-image: url("../img/arrow-up.png");
 }
-/* line 363, ../scss/rego.scss */
+/* line 367, ../scss/rego.scss */
 .icon.delete {
   background-image: url("../img/delete.png");
   float: right;
 }
-/* line 368, ../scss/rego.scss */
+/* line 372, ../scss/rego.scss */
 .icon.edit {
   background-image: url("../img/edit.png");
 }
 
-/* line 377, ../scss/rego.scss */
+/* line 381, ../scss/rego.scss */
 table {
   border-spacing: 0;
 }
 
-/* line 381, ../scss/rego.scss */
+/* line 385, ../scss/rego.scss */
 table tr.totals td {
   text-align: right;
 }
 
-/* line 385, ../scss/rego.scss */
+/* line 389, ../scss/rego.scss */
 table tr td.numeric {
   text-align: right;
 }
 
-/* line 391, ../scss/rego.scss */
+/* line 395, ../scss/rego.scss */
 table tr.registrant-name td .gamertag {
   font-size: 1.25rem;
 }
-/* line 395, ../scss/rego.scss */
+/* line 399, ../scss/rego.scss */
 table tr.registrant-name td .email {
   font-size: 0.8rem;
 }
 
-/* line 400, ../scss/rego.scss */
+/* line 404, ../scss/rego.scss */
 table tr.sub-total td {
   border-bottom: solid 2px #38ADCE;
   font-weight: bold;
   background-color: #ebf7fa;
 }
 
-/* line 406, ../scss/rego.scss */
+/* line 410, ../scss/rego.scss */
 table tr.grand-total td {
   font-weight: bold;
   color: #FFFFFF;
   background-color: #38ADCE;
 }
 
-/* line 415, ../scss/rego.scss */
+/* line 419, ../scss/rego.scss */
 .slide-from-right {
   position: absolute;
   top: 0;
@@ -891,45 +895,45 @@ table tr.grand-total td {
   background-color: #FFFFFF;
 }
 
-/* line 422, ../scss/rego.scss */
+/* line 426, ../scss/rego.scss */
 .slide-from-left.ng-hide-remove {
   -webkit-animation: slideInLeft 0.5s;
   animation: slideInLeft 0.5s;
 }
 
-/* line 427, ../scss/rego.scss */
+/* line 431, ../scss/rego.scss */
 .slide-from-left.ng-hide-add {
   -webkit-animation: slideOutLeft 0.5s;
   animation: slideOutLeft 0.5s;
 }
 
-/* line 432, ../scss/rego.scss */
+/* line 436, ../scss/rego.scss */
 .slide-from-right.ng-hide-remove {
   -webkit-animation: slideInRight 0.5s;
   animation: slideInRight 0.5s;
 }
 
-/* line 437, ../scss/rego.scss */
+/* line 441, ../scss/rego.scss */
 .slide-from-right.ng-hide-add {
   -webkit-animation: slideOutRight 0.5s;
   animation: slideOutRight 0.5s;
 }
 
-/* line 442, ../scss/rego.scss */
+/* line 446, ../scss/rego.scss */
 .slide-from-top.ng-hide-remove {
   animation: fadeInDown 0.5s;
   -webkit-animation: fadeInDown 0.5s;
   -moz-animation: fadeInDown 0.5s;
 }
 
-/* line 449, ../scss/rego.scss */
+/* line 453, ../scss/rego.scss */
 .slide-from-top.ng-hide-add {
   animation: fadeOutUp 0.5s;
   -webkit-animation: fadeOutUp 0.5s;
   -moz-animation: fadeOutUp 0.5s;
 }
 
-/* line 455, ../scss/rego.scss */
+/* line 459, ../scss/rego.scss */
 .animate-repeat.ng-move,
 .animate-repeat.ng-enter,
 .animate-repeat.ng-leave {
@@ -939,7 +943,7 @@ table tr.grand-total td {
   transition-delay: 0.65s;
 }
 
-/* line 464, ../scss/rego.scss */
+/* line 468, ../scss/rego.scss */
 .animate-repeat.ng-leave.ng-leave-active,
 .animate-repeat.ng-move,
 .animate-repeat.ng-enter {
@@ -947,7 +951,7 @@ table tr.grand-total td {
   max-height: 0;
 }
 
-/* line 471, ../scss/rego.scss */
+/* line 475, ../scss/rego.scss */
 .animate-repeat.ng-leave,
 .animate-repeat.ng-move.ng-move-active,
 .animate-repeat.ng-enter.ng-enter-active {
@@ -955,7 +959,7 @@ table tr.grand-total td {
   max-height: 1048px;
 }
 
-/* line 480, ../scss/rego.scss */
+/* line 484, ../scss/rego.scss */
 .loading {
   z-index: 9999;
   width: 100%;
@@ -964,19 +968,19 @@ table tr.grand-total td {
   position: absolute;
   top: 0;
 }
-/* line 488, ../scss/rego.scss */
+/* line 492, ../scss/rego.scss */
 .loading .spinning-dots-spinner {
   width: 40px;
   height: 40px;
   margin: 12.5rem auto 0 auto;
 }
-/* line 494, ../scss/rego.scss */
+/* line 498, ../scss/rego.scss */
 .loading .container1 > div, .loading .container2 > div, .loading .container3 > div {
   width: 12px;
   height: 12px;
   background-color: #1c94c4;
 }
-/* line 500, ../scss/rego.scss */
+/* line 504, ../scss/rego.scss */
 .loading .loading-text {
   color: #1c94c4;
   margin-left: auto;

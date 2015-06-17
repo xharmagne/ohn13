@@ -56,17 +56,38 @@ if ($mysqli->multi_query($query)) {
           $games = "N/A";
         }
         
-        $body = sprintf("<p>Thanks for registering for OHN13! Here are the details of your registration:</p>
-                         <table>
-	                        <tr><td>Gamertag</td><td>%s</td></tr>
-	                        <tr><td>Pass type</td><td>%s</td></tr>
-	                        <tr><td>Games</td><td>%s</td></tr>
-                        </table>", $gamertag, $pass, $games);
+        $body = sprintf('<div style="width:600px;margin:0 auto">
+                          <img src="http://ohn.ozhadou.net/img/img_banner.jpg" alt="OHN13" style="width:auto;max-height:170px" />
+        
+                          <h1>OHN13 Registration confirmed</h1>
+                  
+                          <p style="font-family:Roboto, Verdana;">Thanks for registering for OHN13! Here are the details of your registration:</p>
+                          
+                          <table style="font-family:Roboto, Verdana;">
+	                          <tr><td style="font-weight:bold;width:100px">Gamertag</td><td>%s</td></tr>
+	                          <tr><td style="font-weight:bold;">Pass type</td><td>%s</td></tr>
+	                          <tr><td style="font-weight:bold;">Games</td><td>%s</td></tr>
+                          </table>
+                          
+                          <br/>
+                          
+                          <p style="font-family:Roboto, Verdana;">What to do on entry:</p>
+                          
+                          <ul style="font-family:Roboto, Verdana;">
+                            <li style="font-family:Roboto, Verdana;">Show us a copy of this email (printed or on your smartphone) </li>
+                            <li style="font-family:Roboto, Verdana;">Show us photo identification if requested </li>
+                          </ul>
+                          
+                        </div>', $gamertag, $pass, $games);
                         
         $plainBody = sprintf("Thanks for registering for OHN13! Here are the details of your registration:\n\n
                               Gamertag: %s\n
 	                            Pass type: %s\n
-	                            Games: %s\n", $gamertag, $pass, $games);
+	                            Games: %s\n
+                              \n\n
+                              What to do on entry:\n
+                              Show us a copy of this email (printed or on your smartphone)\n
+                              Show us photo identification if requested", $gamertag, $pass, $games);
         
         send_mail($name, $email, "OHN 13 Registration Confirmed", $body, $plainBody);
     }
