@@ -133,6 +133,8 @@ function RegoController($scope, $http, $anchorScroll, $window) {
         registrant.usf4Registered = false;
         registrant.ttt2Registered = false;
         registrant.mkxRegistered = false;
+        registrant.kofRegistered = false;
+        registrant.mvcRegistered = false;
 
         registrant.items = [];
         registrant.total = 0;
@@ -176,9 +178,13 @@ function RegoController($scope, $http, $anchorScroll, $window) {
         registrant.usf4 = false;
         registrant.ttt2 = false;
         registrant.mkx = false;
+        registrant.kof = false;
+        registrant.mvc = false;
         registrant.usf4Registered = false;
         registrant.ttt2Registered = false;
         registrant.mkxRegistered = false;
+        registrant.kofRegistered = false;
+        registrant.mvcRegistered = false;
     };
 
     that.scope.getExistingRegistrant = function (registrant) {
@@ -195,14 +201,14 @@ function RegoController($scope, $http, $anchorScroll, $window) {
                 }
             }).success(function (data, status, headers, config) {
 
-                registrant.usf4 = false;
-                registrant.ttt2 = false;
-                registrant.mkx = false;
+                that.scope.resetGamesSelected(registrant);
 
                 if (data) {
                     registrant.usf4Registered = data.usf4Registered == true;
                     registrant.ttt2Registered = data.ttt2Registered == true;
                     registrant.mkxRegistered = data.mkxRegistered == true;
+                    registrant.kofRegistered = data.kofRegistered == true;
+                    registrant.mvcRegistered = data.mvcRegistered == true;
                 }
                 
             });

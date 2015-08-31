@@ -18,6 +18,8 @@ if ($qryresult = $mysqli->query($query)) {
       $usf4Registered = 0;
       $ttt2Registered = 0;
       $mkxRegistered = 0;
+      $kofRegistered = 0;
+      $mvcRegistered = 0;
        
       if ($row["USF4"]) {
         $usf4Registered = 1;
@@ -28,8 +30,14 @@ if ($qryresult = $mysqli->query($query)) {
         if ($row["MKX"]) {
         $mkxRegistered = 1;
       }
+      if ($row["KOF"]) {
+        $kofRegistered = 1;
+      }
+      if ($row["MARVEL"]) {
+        $mvcRegistered = 1;
+      }
                 
-      $arr = array('usf4Registered' => $usf4Registered, 'ttt2Registered' => $ttt2Registered, 'mkxRegistered' => $mkxRegistered);
+      $arr = array('usf4Registered' => $usf4Registered, 'ttt2Registered' => $ttt2Registered, 'mkxRegistered' => $mkxRegistered, 'kofRegistered' => $kofRegistered, 'mvcRegistered' => $mvcRegistered);
       $result = json_encode($arr);
 
   }
